@@ -25,6 +25,7 @@ def write_file(file, data):
 def append_to_file(file, data):
     with open(file, 'a') as f:
         f.write(data + '\n')
+        f.close()
 
 
 def delete_file_contents(file):

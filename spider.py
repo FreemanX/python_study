@@ -43,13 +43,13 @@ class Spider:
         url_string = ''
         try:
             response = urlopen(page_url)
-            if response.getheader('Content-Type') == 'text/html':
+            if 'text/html' in response.getheader('Content-Type'):
                 url_bytes = response.read()
                 url_string = url_bytes.decode("utf-8")
             finder = UrlFinder(Spider.base_url, page_url)
             finder.feed(url_string)
-        except:
-            print('Error: can not open this page')
+        except Exception as e:
+            print(str(e))
             return set()
         return finder.page_urls()
 
@@ -66,5 +66,3 @@ class Spider:
     def update_files():
         set_to_file(Spider.queue, Spider.queue_file)
         set_to_file(Spider.crawled, Spider.crawled_file)
-
-    

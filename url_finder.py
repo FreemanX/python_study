@@ -3,13 +3,14 @@ from urllib import parse
 
 
 class UrlFinder(HTMLParser):
+
     def __init__(self, base_url, page_url):
-        super.__init__()
+        super().__init__()
         self.base_url = base_url
         self.page_url = page_url
         self.urls = set()
 
-    def handle_startendtag(self, tag, attrs):
+    def handle_starttag(self, tag, attrs):
         if tag == 'a':
             for(attribute, value) in attrs:
                 if attribute == 'href':
